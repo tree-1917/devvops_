@@ -6,35 +6,49 @@
 services: 
     # + Vote Servies + # 
     vote: 
-         image: vote-app:latest
+         build: 
+            context: ./vote
+            dockerfile: Dockerfile
          container_name: vote
-         dockerfile: ./vote/Dockerfile 
          ports:
             - "8000:8000"
          networks:
             - frontend-net
             - backend-net
+         depends_on:
+            - redis
+            - postgres
+            - worker
 
     # + Result Servies + # 
     result: 
-         image: result-app:latest
+         build: 
+            context: ./result
+            dockerfile: Dockerfile
          container_name: result
-         dockerfile: ./result/Dockerfile 
          ports:
-            - "8001:8001"
+            - "4000:4000"
          networks:
             - frontend-net 
             - backend-net
+         depends_on:
+            - redis
+            - postgres
+            - worker
 
     # + Worker Service + # 
     worker: 
-         image: worker-app:latest
+         build: 
+            context: ./worker
+            dockerfile: Dockerfile
          container_name: worker
-         dockerfile: ./worker/Dockerfile 
          ports:
-            - "8002:8002"
+            - "5252:5252"
          networks:
             - backend-net 
+         depends_on:
+            - redis
+            - postgres
 
     # + Redis Servies + # 
     redis: 
@@ -44,6 +58,11 @@ services:
             - "6379:6379"
          networks:
             - backend-net 
+         healthcheck:
+            test: ["CMD", "./healthchecks/redis.sh"]
+            interval: 10s
+            timeout: 5s
+            retries: 5 
     
     # + Postgres Servies + # 
     postgres: 
@@ -57,6 +76,11 @@ services:
             - "5432:5432"
          networks:
             - backend-net 
+         healthcheck:
+            test: ["CMD", "./healthchecks/postgres.sh"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
 # }}} 
 
 # + Networks {{{
