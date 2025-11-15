@@ -1,0 +1,68 @@
+# =========================== #
+# === DevOps Compose File === # 
+# =========================== #
+
+# + Services {{{
+services: 
+    # + Vote Servies + # 
+    vote: 
+         image: vote-app:latest
+         container_name: vote
+         dockerfile: ./vote/Dockerfile 
+         ports:
+            - "8000:8000"
+         networks:
+            - frontend-net
+            - backend-net
+
+    # + Result Servies + # 
+    result: 
+         image: result-app:latest
+         container_name: result
+         dockerfile: ./result/Dockerfile 
+         ports:
+            - "8001:8001"
+         networks:
+            - frontend-net 
+            - backend-net
+
+    # + Worker Service + # 
+    worker: 
+         image: worker-app:latest
+         container_name: worker
+         dockerfile: ./worker/Dockerfile 
+         ports:
+            - "8002:8002"
+         networks:
+            - backend-net 
+
+    # + Redis Servies + # 
+    redis: 
+         image: redis:alpine
+         container_name: redis
+         ports:
+            - "6379:6379"
+         networks:
+            - backend-net 
+    
+    # + Postgres Servies + # 
+    postgres: 
+         image: postgres:alpine
+         container_name: postgres
+         environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+         ports:
+            - "5432:5432"
+         networks:
+            - backend-net 
+# }}} 
+
+# + Networks {{{
+networks:
+    frontend-net:
+        driver: bridge
+    backend-net:
+        driver: bridge
+# }}}
