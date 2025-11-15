@@ -1,0 +1,47 @@
+
+# =========================== # 
+# === production Workflow === # 
+# =========================== # 
+name: Production
+
+on:
+  push:
+    branches:
+      - main   # Trigger workflow on push to main branch
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Images
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      APP_NAMES: vote result worker seed
+      TAG: prod
+
+    steps:
+      #  Checkout the repo
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      #  Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      #  Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      #  Build and push images
+      - name: Build and Push Docker Images
+        run: |
+          for app in $APP_NAMES; do
+            echo "Building and pushing $app image..."
+            docker build -t $DOCKERHUB_USERNAME/$app:$TAG ./\$app
+            docker push $DOCKERHUB_USERNAME/$app:$TAG
+          done
+
