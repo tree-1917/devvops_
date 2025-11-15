@@ -20,6 +20,8 @@ WORKDIR /app
 
 COPY --from=builder /app ./
 
-EXPOSE 4000
+ENV PORT=8081
+
+EXPOSE 8081
 
 CMD ["npm", "run", "server"]

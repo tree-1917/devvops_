@@ -1,0 +1,23 @@
+# vote-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-deployment
+  namespace: frontend
+
+  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+        - name: vote
+          image: tree-1917/vote:latest
+          ports:
+            - containerPort: 8080

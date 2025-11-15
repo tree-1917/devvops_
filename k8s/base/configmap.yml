@@ -1,0 +1,7 @@
+apiVersion: v1 
+kind: ConfigMap
+metadata:
+    name: app-config 
+data:
+  VOTE_PORT: "8080"
+  RESULT_PORT: "8081"

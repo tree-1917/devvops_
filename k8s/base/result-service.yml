@@ -1,0 +1,14 @@
+# result-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  namespace: frontend 
+spec:
+  selector:
+    app: result
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+

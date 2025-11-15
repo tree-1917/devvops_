@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: work-deployment
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: work
+  template:
+    metadata:
+      labels:
+        app: work
+    spec:
+      containers:
+        - name: work
+          image: work
+          ports:
+            - containerPort: 5252

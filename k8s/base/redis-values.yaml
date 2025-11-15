@@ -1,0 +1,6 @@
+cluster:
+  enabled: false
+master:
+  persistence:
+    enabled: true
+    size: 1Gi

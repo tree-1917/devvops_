@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: backend-networkpolicy
+    namespace: backend
+spec:
+    podSelector: {} # selects all pods in backend namespace
+    policyTypes:
+        - Ingress
+    ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                    app: frontend

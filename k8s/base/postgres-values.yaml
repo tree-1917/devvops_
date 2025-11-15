@@ -1,0 +1,7 @@
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
+postgresqlUsername: postgres
+postgresqlPassword: postgres
+postgresqlDatabase: postgres
