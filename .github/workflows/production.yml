@@ -1,6 +1,6 @@
-# =========================== # 
-# === production Workflow === # 
-# =========================== # 
+# ===========================
+# === Production Workflow ===
+# ===========================
 name: Production
 
 on:
@@ -8,38 +8,82 @@ on:
     branches:
       - main
 
+env:
+  APP_NAMES: vote result worker seed
+  TAG: prod
+
 jobs:
-  build-and-push:
-    name: Build and Push Docker Images
+
+  # ---------------------
+  # 1) BUILD DOCKER IMAGES
+  # ---------------------
+  build:
+    name: Build Docker Images
     runs-on: ubuntu-latest
 
-    env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}      # <-- your new token
-      APP_NAMES: vote result worker seed
-      TAG: prod
-
     steps:
-      # Checkout the repo
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # Log in to Docker Hub using access token
+      - name: Build Docker Images (no push)
+        run: |
+          for app in $APP_NAMES; do
+            echo "Building $app..."
+            docker build -t $app:$TAG ./$app
+          done
+
+      - name: Save Docker Images as Artifacts
+        run: |
+          mkdir saved
+          for app in $APP_NAMES; do
+            docker save $app:$TAG -o saved/$app.tar
+          done
+        shell: bash
+
+      - name: Upload images
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-images
+          path: saved/
+
+
+  # ---------------------
+  # 2) PUSH DOCKER IMAGES
+  # ---------------------
+  push:
+    name: Push Docker Images to Docker Hub
+    runs-on: ubuntu-latest
+    needs: build
+
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+    steps:
+      - name: Download images
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-images
+          path: saved/
+
+      - name: Load Images
+        run: |
+          for app in $APP_NAMES; do
+            docker load -i saved/$app.tar
+          done
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      # Build and push Docker images
-      - name: Build and Push Docker Images
+      - name: Tag and Push
         run: |
           for app in $APP_NAMES; do
-            echo "Building and pushing $app image..."
-            docker build -t $DOCKERHUB_USERNAME/$app:$TAG ./\$app
-            docker push $DOCKERHUB_USERNAME/$app:$TAG
+            docker tag $app:prod $DOCKERHUB_USERNAME/$app:prod
+            docker push $DOCKERHUB_USERNAME/$app:prod
           done
