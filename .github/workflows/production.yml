@@ -13,10 +13,10 @@ on:
         description: "Do you want to update porduction cluster?"
         required: true
         type: choice
+        default: false 
         options:
-          - yes
-          - no
-
+          - 'true'
+          - 'false
 
 env:
   APP_NAMES: vote result worker seed
