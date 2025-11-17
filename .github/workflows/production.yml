@@ -23,31 +23,27 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker Images (no push)
-        run: |
-          for app in $APP_NAMES; do
-            echo "Building $app..."
-            docker build -t $app:$TAG ./$app
-          done
-
-      - name: Save Docker Images as Artifacts
-        run: |
-          mkdir saved
-          for app in $APP_NAMES; do
-            docker save $app:$TAG -o saved/$app.tar
-          done
+      - name: Build Images (no push)
         shell: bash
+        run: |
+          mkdir -p docker-save
+          for app in $APP_NAMES; do
+            echo "Building image for: $app"
+            docker build -t $app:$TAG "./$app"
+            docker save -o "docker-save/$app.tar" "$app:$TAG"
+          done
 
-      - name: Upload images
-        uses: actions/upload-artifact@v3
+      - name: Upload built images
+        uses: actions/upload-artifact@v4
         with:
-          name: docker-images
-          path: saved/
+          name: built-docker-images
+          path: docker-save/
+          retention-days: 1
 
 
   # ---------------------
@@ -61,18 +57,22 @@ jobs:
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      TAG: prod
+      APP_NAMES: vote result worker seed
 
     steps:
       - name: Download images
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: docker-images
-          path: saved/
+          name: built-docker-images
+          path: docker-load/
 
-      - name: Load Images
+      - name: Load Docker Images
+        shell: bash
         run: |
           for app in $APP_NAMES; do
-            docker load -i saved/$app.tar
+            echo "Loading $app..."
+            docker load -i "docker-load/$app.tar"
           done
 
       - name: Log in to Docker Hub
@@ -81,9 +81,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Tag and Push
+      - name: Tag & Push Images
+        shell: bash
         run: |
           for app in $APP_NAMES; do
-            docker tag $app:prod $DOCKERHUB_USERNAME/$app:prod
-            docker push $DOCKERHUB_USERNAME/$app:prod
+            echo "Pushing: $DOCKERHUB_USERNAME/$app:$TAG"
+            docker tag "$app:$TAG" "$DOCKERHUB_USERNAME/$app:$TAG"
+            docker push "$DOCKERHUB_USERNAME/$app:$TAG"
           done
