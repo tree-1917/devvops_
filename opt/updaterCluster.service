@@ -1,0 +1,13 @@
+[Unit]
+Description=Production Cluster Updater
+After=network.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/opt/scripts/updaterCluster.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
