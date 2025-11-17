@@ -16,7 +16,7 @@ on:
         default: false 
         options:
           - 'true'
-          - 'false
+          - 'false'
 
 env:
   APP_NAMES: vote result worker seed
