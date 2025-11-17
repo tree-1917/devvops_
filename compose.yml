@@ -76,7 +76,7 @@ services:
    # + Seed Data Service + # 
     seed:
          build: 
-            context: ./seed-data
+            context: ./seed
             dockerfile: Dockerfile
          container_name: seed
          #entrypoint: ["sleep", "inf"]
