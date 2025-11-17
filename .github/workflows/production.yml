@@ -7,6 +7,16 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: "Do you want to update porduction cluster?"
+        required: true
+        type: choice
+        options:
+          - yes
+          - no
+
 
 env:
   APP_NAMES: vote result worker seed
@@ -89,3 +99,31 @@ jobs:
             docker tag "$app:$TAG" "$DOCKERHUB_USERNAME/$app:$TAG"
             docker push "$DOCKERHUB_USERNAME/$app:$TAG"
           done
+
+  # ---------------------
+  # 3) UPDATE PRODUCTION CLUSTER
+  # ---------------------
+  update:
+    name: Update Production Cluster
+    runs-on: < Master Node >
+    needs: push
+
+    if: ${{ inputs.trigger == 'yes' }} 
+    steps: 
+      - name: Trigger Cluster Update
+        run: |
+            echo "Triggering cluster update..."
+            sudo systemctl start updater.service
+
+            sleep 3
+            echo "updater service status: "
+            sudo systemctl status updater.service
+
+            sleep 3
+            echo "stopping updater service..."
+            sudo systemctl stop updater.service
+
+
+
+
+
