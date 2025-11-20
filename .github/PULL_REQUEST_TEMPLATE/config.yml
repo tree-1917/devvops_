@@ -1,13 +1,12 @@
-pull_request_templates:
+pull_request_templates: 
   - name: "Standard Pull Request"
-    filename: "pull_request.yaml"
-    description: "General template for features and enhancements"
+    filename: "pull_request.md"
+    description: "General template for feature and enhancements"
 
-  - name: "Bug Fix"
-    filename: "bug_fix.yaml"
+  - name: "Bug Fix Pull Request"
+    filename: "bug_fix.md"
     description: "Template for bug fixes"
 
-  - name: "Feature/Enhancement"
-    filename: "feature_pr.yaml"
-    description: "Template for new features or enhancements"
-
+  - name: "Feature Pull Request"
+    filename: "feature_pr.md"
+    description: "Template for Feature"

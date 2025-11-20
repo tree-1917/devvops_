@@ -1,54 +1,23 @@
-name: "Standard Pull Request"
-description: "General template for features and enhancements"
-title: "[PR]: "
-labels: []
-body:
-  - type: textarea
-    id: description
-    attributes:
-      label: "Description"
-      description: "Describe what this PR does and why it’s needed."
-      placeholder: "Enter a description of the changes made."
-    validations:
-      - required: true
+# Pull Request
 
-  - type: textarea
-    id: related_issues
-    attributes:
-      label: "Related Issues"
-      description: "Link any related issues. Example: `Closes #12`, `Fixes #99`"
-      placeholder: "Related issues"
-    validations:
-      - required: false
+## Description
+Describe what this PR does and why it’s needed.
 
-  - type: textarea
-    id: changes
-    attributes:
-      label: "Changes"
-      description: "List the main changes in this PR."
-      placeholder: "- Change 1\n- Change 2\n- Change 3"
-    validations:
-      - required: true
+## Related Issues
+Link related issues:  
+Example: `Closes #12`, `Fixes #99`
 
-  - type: textarea
-    id: tests
-    attributes:
-      label: "Tests"
-      description: "Describe how the changes were tested."
-      placeholder: "Steps or testing strategy"
-    validations:
-      - required: true
+## Changes
+- Item 1
+- Item 2
+- Item 3
 
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: "Checklist"
-      options:
-        - "Code compiles without errors"
-        - "Tests added/updated"
-        - "No breaking changes"
-        - "Documentation updated (if needed)"
-        - "Ready for review"
-    validations:
-      - required: true
+## Tests
+Describe how the changes were tested.
 
+## Checklist
+- [ ] Code compiles without errors
+- [ ] Tests added/updated
+- [ ] No breaking changes
+- [ ] Documentation updated (if needed)
+- [ ] Ready for review
