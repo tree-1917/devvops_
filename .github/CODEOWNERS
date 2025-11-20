@@ -1,0 +1,17 @@
+# All files
+* @tree-1917
+
+# All files in the docs directory
+/docs/* @systemAdmin
+
+# All files in the src directory
+/src/* @backend
+
+# All files in the tests directory
+/tests/* @tester
+
+# All files in the utils directory
+/utils/* @devops
+
+# All files in the .github directory
+/.github/* @devops
