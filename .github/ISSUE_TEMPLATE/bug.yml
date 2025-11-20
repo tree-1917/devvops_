@@ -1,43 +1,48 @@
-name: "\U0001F41E Bug report"
-description: Create a report to help us improve the container
+name: "🐞 Bug Report"
+description: Report an issue to help us improve the container
 title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: input
     id: os
     attributes:
-      label: Operating system
-      description: Your Linux distribution (can be shown by `lsb_release -a`).
-      placeholder: e.g. Ubuntu 24.04
+      label: Operating System
+      description: Your Linux distribution (e.g., output of `lsb_release -a`).
+      placeholder: Ubuntu 24.04
     validations:
       required: true
+
   - type: textarea
     id: summary
     attributes:
-      label: Description
-      description: Describe the expected behaviour, the actual behaviour, and the steps to reproduce.
+      label: Issue Description
+      description: What happened? What did you expect? How can we reproduce it?
     validations:
       required: true
+
   - type: textarea
     id: compose
     attributes:
-      label: Docker compose
-      description: The compose file (or otherwise the `docker run` command used).
+      label: Docker Compose / Run Command
+      description: Paste your Docker Compose file or the `docker run` command you used.
       render: yaml
     validations:
       required: true
+
   - type: textarea
     id: log
     attributes:
-      label: Docker log
-      description: The logfile of the container (as shown by `docker logs windows`).
+      label: Container Logs
+      description: Paste logs from `docker logs windows`.
       render: shell
     validations:
       required: true
+
   - type: textarea
     id: screenshot
     attributes:
-      label: Screenshots (optional)
-      description: Screenshots that might help to make the problem more clear.
+      label: Screenshots (Optional)
+      description: Add any screenshots that help explain the issue.
     validations:
       required: false
+
