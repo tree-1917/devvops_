@@ -1,0 +1,54 @@
+name: "Standard Pull Request"
+description: "General template for features and enhancements"
+title: "[PR]: "
+labels: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe what this PR does and why it’s needed."
+      placeholder: "Enter a description of the changes made."
+    validations:
+      - required: true
+
+  - type: textarea
+    id: related_issues
+    attributes:
+      label: "Related Issues"
+      description: "Link any related issues. Example: `Closes #12`, `Fixes #99`"
+      placeholder: "Related issues"
+    validations:
+      - required: false
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: "Changes"
+      description: "List the main changes in this PR."
+      placeholder: "- Change 1\n- Change 2\n- Change 3"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: "Tests"
+      description: "Describe how the changes were tested."
+      placeholder: "Steps or testing strategy"
+    validations:
+      - required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - "Code compiles without errors"
+        - "Tests added/updated"
+        - "No breaking changes"
+        - "Documentation updated (if needed)"
+        - "Ready for review"
+    validations:
+      - required: true
+

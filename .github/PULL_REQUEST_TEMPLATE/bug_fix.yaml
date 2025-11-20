@@ -1,0 +1,157 @@
+name: "Bug Fix"
+description: "Template for bug fixes"
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: "Issue"
+      description: "What bug does this PR fix? Example: `Fixes #45`"
+      placeholder: "Link the related issue"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: fix_description
+    attributes:
+      label: "Fix Description"
+      description: "Explain the root cause and how you fixed it."
+      placeholder: "Describe the bug fix"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: steps_to_test
+    attributes:
+      label: "Steps to Test"
+      description: "Provide steps to reproduce and verify the fix."
+      placeholder: "1. Step one\n2. Step two\n3. Expected result"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes"
+      description: "Anything helpful for reviewers."
+      placeholder: "Optional notes"
+    validations:
+      - required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - "Bug fixed successfully"
+        - "Tests added/updated"
+        - "No side effects introduced"
+        - "Documentation updated (if needed)"
+    validations:
+      - required: true
+name: "Bug Fix"
+description: "Template for bug fixes"
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: "Issue"
+      description: "What bug does this PR fix? Example: `Fixes #45`"
+      placeholder: "Link the related issue"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: fix_description
+    attributes:
+      label: "Fix Description"
+      description: "Explain the root cause and how you fixed it."
+      placeholder: "Describe the bug fix"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: steps_to_test
+    attributes:
+      label: "Steps to Test"
+      description: "Provide steps to reproduce and verify the fix."
+      placeholder: "1. Step one\n2. Step two\n3. Expected result"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes"
+      description: "Anything helpful for reviewers."
+      placeholder: "Optional notes"
+    validations:
+      - required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - "Bug fixed successfully"
+        - "Tests added/updated"
+        - "No side effects introduced"
+        - "Documentation updated (if needed)"
+    validations:
+      - required: true
+name: "Bug Fix"
+description: "Template for bug fixes"
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: "Issue"
+      description: "What bug does this PR fix? Example: `Fixes #45`"
+      placeholder: "Link the related issue"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: fix_description
+    attributes:
+      label: "Fix Description"
+      description: "Explain the root cause and how you fixed it."
+      placeholder: "Describe the bug fix"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: steps_to_test
+    attributes:
+      label: "Steps to Test"
+      description: "Provide steps to reproduce and verify the fix."
+      placeholder: "1. Step one\n2. Step two\n3. Expected result"
+    validations:
+      - required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: "Additional Notes"
+      description: "Anything helpful for reviewers."
+      placeholder: "Optional notes"
+    validations:
+      - required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Checklist"
+      options:
+        - "Bug fixed successfully"
+        - "Tests added/updated"
+        - "No side effects introduced"
+        - "Documentation updated (if needed)"
+    validations:
+      - required: true
+

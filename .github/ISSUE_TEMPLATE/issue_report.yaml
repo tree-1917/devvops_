@@ -1,0 +1,22 @@
+name: "Issue Report"
+description: "Report a general issue."
+title: "[Issue]: "
+labels: ["help wanted"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe your issue here."
+      placeholder: "Describe your issue here."
+    validations:
+      - required: true
+
+  - type: textarea
+    id: extra_info
+    attributes:
+      label: "Extra Info"
+      description: "Any logs, screenshots, or other details."
+      placeholder: "Provide any logs, screenshots, or other details."
+    validations:
+      - required: false
