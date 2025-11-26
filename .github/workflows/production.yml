@@ -24,6 +24,24 @@ env:
 
 jobs:
 
+  # --------------------------
+  # 0) Review Code in SonarQube 
+  # --------------------------
+#  sonar:
+#    runs-on: ubuntu-latest
+#    steps: 
+#      - name: Move Code To Review
+#        uses: actions/checkout@v4
+#        with: 
+#          fetch-depth: 0
+#
+#      - name: Sonar Scanner 
+#        uses: SonarQube/Sonarqube-scan-action@v2
+#        env: 
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+        
   # ---------------------
   # 1) BUILD DOCKER IMAGES
   # ---------------------
