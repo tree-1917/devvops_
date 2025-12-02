@@ -15,12 +15,11 @@ resources:
 
 images:
   - name: vote
-    newName: vote
-    newTag: latest
+    newName: tree1917/vote
+    newTag: dev
   - name: result
-    newName: result
-    newTag: latest
+    newName: tree1917/result
+    newTag: dev
   - name: work
-    newName: work
-    newTag: latest
-
+    newName: tree1917/work
+    newTag: dev
