@@ -15,37 +15,11 @@ resources:
 
 images:
   - name: vote
-    newName: tree-1917/vote
+    newName: tree1917/vote
     newTag: prod
   - name: result
-    newName: tree-1917/result
+    newName: tree1917/result
     newTag: prod
   - name: work
-    newName: tree-1917/work
+    newName: tree1917/work
     newTag: prod
-apiVersion: kustomize.config.k8s.io/v1
-kind: Kustomization
-
-resources:
-  - ../../base/namespaces.yaml
-  - ../../base/configmap.yml
-  - ../../base/secrets.yml
-  - ../../base/vote-deployment.yml
-  - ../../base/vote-service.yml
-  - ../../base/result-deployment.yml
-  - ../../base/result-service.yml
-  - ../../base/worker-deployment.yml
-  - ../../base/worker-service.yml
-  - ../../base/backend-networkpolicy.yml
-
-images:
-  - name: vote
-    newName: tree-1917/vote
-    newTag: prod
-  - name: result
-    newName: tree-1917/result
-    newTag: prod
-  - name: work
-    newName: tree-1917/work
-    newTag: prod
-
